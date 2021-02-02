@@ -1,3 +1,5 @@
+require_relative "../spec_helper"
+
 describe Gateways::Team do
   context "Given no teams" do
     before do
@@ -25,6 +27,7 @@ describe Gateways::Team do
       expect(result.count).to eq(1)
       expect(result.first.team_name).to eq("govuk-developers")
       expect(result.first.applications).to eq(%w[asset-manager])
+      expect(result.first.continuously_deployed_apps).to eq(%w[asset-manager])
     end
   end
 
@@ -43,6 +46,7 @@ describe Gateways::Team do
         expect(result.count).to eq(1)
         expect(result.first.team_name).to eq("govuk-pub-workflow")
         expect(result.first.applications).to eq(%w[asset-manager])
+        expect(result.first.continuously_deployed_apps).to eq(%w[asset-manager])
       end
     end
 
@@ -60,6 +64,7 @@ describe Gateways::Team do
         expect(result.count).to eq(1)
         expect(result.first.team_name).to eq("govuk-platform-health")
         expect(result.first.applications).to eq(%w[asset-manager asset-uploader])
+        expect(result.first.continuously_deployed_apps).to eq(%w[asset-manager])
       end
     end
   end
@@ -79,9 +84,11 @@ describe Gateways::Team do
       expect(result.count).to eq(2)
       expect(result.first.team_name).to eq("govuk-platform-health")
       expect(result.first.applications).to eq(%w[publisher frontend])
+      expect(result.first.continuously_deployed_apps).to eq([])
 
       expect(result.last.team_name).to eq("govuk-searchandnav")
       expect(result.last.applications).to eq(%w[government-frontend])
+      expect(result.last.continuously_deployed_apps).to eq(%w[government-frontend])
     end
   end
 end
